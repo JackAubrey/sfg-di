@@ -3,6 +3,7 @@ package guru.springframework.sfgdi;
 import guru.springframework.sfgdi.components.PrototypeBean;
 import guru.springframework.sfgdi.components.SingletonBean;
 import guru.springframework.sfgdi.controllers.*;
+import guru.springframework.sfgdi.datasource.FakeDataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,10 @@ public class SfgDiApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(SfgDiApplication.class, args);
+		
+		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
+		log.info("--- The DataSource is ---");
+		log.info(fakeDataSource.toString());
 
 		PetController petController = ctx.getBean("petController", PetController.class);
 		log.info("--- The Best Pet is ---");
