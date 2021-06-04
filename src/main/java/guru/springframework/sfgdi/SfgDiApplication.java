@@ -2,6 +2,8 @@ package guru.springframework.sfgdi;
 
 import guru.springframework.sfgdi.components.PrototypeBean;
 import guru.springframework.sfgdi.components.SingletonBean;
+import guru.springframework.sfgdi.config.SfgiConfiguration;
+import guru.springframework.sfgdi.config.SfgiConstructorConfiguration;
 import guru.springframework.sfgdi.controllers.*;
 import guru.springframework.sfgdi.datasource.FakeDataSource;
 
@@ -20,32 +22,28 @@ public class SfgDiApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(SfgDiApplication.class, args);
 		
-		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
-		log.info("--- The DataSource is ---");
-		log.info(fakeDataSource.toString());
-
-		PetController petController = ctx.getBean("petController", PetController.class);
+		var petController = ctx.getBean("petController", PetController.class);
 		log.info("--- The Best Pet is ---");
 		log.info(petController.whichPetIsTheBest());
 
-		I18nController i18nController = (I18nController) ctx.getBean("i18nController");
+		var i18nController = (I18nController) ctx.getBean("i18nController");
 		log.info(i18nController.sayHello());
 
-		MyController myController = (MyController) ctx.getBean("myController");
+		var myController = (MyController) ctx.getBean("myController");
 
 		log.info("------- Primary Bean");
 		log.info(myController.sayHello());
 
 		log.info("------ Property");
-		PropertyInjectedController propertyInjectedController = (PropertyInjectedController) ctx.getBean("propertyInjectedController");
+		var propertyInjectedController = (PropertyInjectedController) ctx.getBean("propertyInjectedController");
 		log.info(propertyInjectedController.getGreeting());
 
 		log.info("--------- Setter");
-		SetterInjectedController setterInjectedController = (SetterInjectedController) ctx.getBean("setterInjectedController");
+		var setterInjectedController = (SetterInjectedController) ctx.getBean("setterInjectedController");
 		log.info(setterInjectedController.getGreeting());
 
 		log.info("-------- Constructor" );
-		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
+		var constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		log.info(constructorInjectedController.getGreeting());
 		
 		log.info("Get Singletone instance 01: {} ", ctx.getBean(SingletonBean.class).getMyScope());
@@ -55,6 +53,18 @@ public class SfgDiApplication {
 		log.info("Get Prototype instance 01: {} ", ctx.getBean(PrototypeBean.class).getMyScope());
 		log.info("Get Prototype instance 02: {} ", ctx.getBean(PrototypeBean.class).getMyScope());
 		log.info("Get Prototype instance 03: {} ", ctx.getBean(PrototypeBean.class).getMyScope());
+		
+		var fakeDataSource = ctx.getBean(FakeDataSource.class);
+		log.info("--- The DataSource is ---");
+		log.info(fakeDataSource.toString());
+		
+		var sfgiConfiguration = ctx.getBean(SfgiConfiguration.class);
+		log.info("--- The SfgiConfiguration is ---");
+		log.info(sfgiConfiguration.toString());
+		
+		var sfgiConstructorConfiguration = ctx.getBean(SfgiConstructorConfiguration.class);
+		log.info("--- The SfgiConstructorConfiguration is ---");
+		log.info(sfgiConstructorConfiguration.toString());
 	}
 
 }
