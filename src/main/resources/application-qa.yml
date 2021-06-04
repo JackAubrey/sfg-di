@@ -1,0 +1,4 @@
+guru:
+  username: QASuperUser
+  password: QADbpassword
+  jdbcurl: QAMyDatabeseUrl

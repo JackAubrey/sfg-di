@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 
 import guru.springframework.sfgdi.datasource.FakeDataSource;
 import guru.springframework.sfgdi.repositories.EnglishGreetingRepository;
@@ -24,7 +23,6 @@ import guru.springframework.sfgdi.services.SetterInjectedGreetingService;
  * @author dcividin
  *
  */
-@PropertySource("classpath:datasource.properties")
 @Configuration
 public class GreetingServiceConfig {
 	

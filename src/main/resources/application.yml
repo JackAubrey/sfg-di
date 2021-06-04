@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active:
+      # dashed value list here, is equivalent to active: ES,cat,qa 
+      - ES
+      - cat
+      - dev
+guru:
+  username: superUser
+  password: dbpassword
+  jdbcurl: MyDatabeseUrl
+
+# this 3 dash means for YAML (just with yaml is possible): consider this as new file
+---
+spring:
+  profiles: prod
+  
+guru:
+  username: ProdSuperUser
+  password: ProdDbpassword
+  jdbcurl: ProdMyDatabeseUrl
